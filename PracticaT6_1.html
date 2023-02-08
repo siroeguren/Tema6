@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    /* El problema era que no estaba cogiendo la refenrencia al body, reinicie el visual studio y empezó a funcionar */
+    body
+    {
+        text-align: center;
+    }
+    #insideDiv
+    {
+        text-align: center; 
+        border : solid;
+        padding: 20px;
+        border-width : 2px;
+        border-color : "#0000FF";
+      
+    }
+    #insideDiv,#outsideDiv
+    {
+        background-color: aqua;
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+    } 
+
+    .square
+    {
+        border : solid;
+        border-width : 2px;
+        border : "#0000FF";
+        width : 150px;
+        height : 50px;
+    margin: 5px;
+        line-height: 45px;
+    }
+    
+    .buttons
+    {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    } 
+</style>
+<script>
+    
+    var nInside = 0;
+    var nOutside = 0;
+
+    function addInside()
+    {
+
+        let square = document.createElement('div');
+        square.setAttribute('class','square');
+        document.querySelector('#insideDiv').appendChild(square);
+        let node = document.createTextNode('Texto dentro: ' + nInside);
+        nInside += 1;
+        square.appendChild(node);
+    }
+
+    function addOutside()
+    {
+        if (!document.getElementById('outsideDiv'))
+        {
+            let outsideDiv = document.createElement('div'); 
+            outsideDiv.setAttribute('id','outsideDiv');
+            document.body.insertBefore(outsideDiv,document.querySelector('.buttons').nextElementSibling);
+        }    
+        let square = document.createElement('div');
+        square.setAttribute('class','square');
+        document.querySelector('#outsideDiv').appendChild(square);
+        let node = document.createTextNode('Texto fuera: ' + nOutside);
+        nOutside += 1;
+        square.appendChild(node);
+    }
+    
+    this.onload  = () =>
+    {
+        document.getElementById('addInside').addEventListener('click', addInside);
+        document.getElementById('addOutside').addEventListener('click', addOutside);
+    }
+</script>
+<body>
+    <div id="insideDiv">2ºCurso de Desarrollo de aplicaciones Web</div>
+    <div class="buttons">
+        <button id="addInside">Add Inside</button>
+        <button id="addOutside">Add Outside</button>
+    </div>
+</body>
+</html>

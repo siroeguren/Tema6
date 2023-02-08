@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio 2 Examen DWEC</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        label 
+        {
+            color: maroon;
+            display: block;
+            padding: 5px;
+        }
+    </style>
+    <script>
+        var lang = "ES" ;
+        const TRANSLATIONS = 
+        {
+            ENG:
+            {
+                'Datos de contacto:' : "Contact information",
+                "Si quieres contactar con nosotros envíanos este formulario relleno:" : "If you want to contact us, please send us this form:",
+                "Nombre:" : "Name:",
+                "Apellidos:" : "Surname:",
+                "Correo electrónico:": "email:",
+                "Traducir" : "Translate"
+            },
+
+            ES:
+            {
+                'Datos de contacto:' :  'Datos de contacto' ,
+                "Si quieres contactar con nosotros envíanos este formulario relleno:" : "Si quieres contactar con nosotros envíanos este formulario relleno:",
+                "Nombre:" : "Nombre:" ,
+                "Apellidos:" : "Apellidos:" ,
+                "Correo electrónico:": "Correo electrónico:",
+                "Traducir" : "Traducir" 
+            }
+           
+        };
+
+        function colorChangeOver(element)
+        {
+            element.style.backgroundColor = 'orange';
+        }
+        function colorChangeOut(element)
+        {
+            element.style.backgroundColor = 'white';
+        }
+
+        function Translate()
+        {
+            if (lang == "ES" )
+            {
+                lang = "ENG";
+            }
+            else if (lang == "ENG")
+            {
+                lang = "ES";
+            }
+            let arrayElements = document.querySelectorAll('h2,p,span,button');
+
+            arrayElements.forEach(element => 
+            {
+                const fieldType = element.nodeName.toLowerCase();
+                switch (fieldType) 
+                {
+                    case 'h2':
+                        element.innerHTML = TRANSLATIONS[lang]["Datos de contacto:"];
+                    break;
+
+                    case 'p': 
+                        element.innerHTML = TRANSLATIONS[lang]["Si quieres contactar con nosotros envíanos este formulario relleno:"];
+                    break;
+
+                    case 'span':
+                            if (["Name:","Nombre:"].includes(element.innerHTML))
+                            {
+                                element.innerHTML = TRANSLATIONS[lang]["Nombre:"];
+                                break;
+                            }
+                            else if (["Surname:","Apellidos:"].includes(element.innerHTML))
+                            {
+                                element.innerHTML = TRANSLATIONS[lang]["Apellidos:"];
+                                break;
+                            }
+                           else if (["Correo electrónico:","email:"].includes(element.innerHTML))
+                            {
+                                element.innerHTML = TRANSLATIONS[lang]["Correo electrónico:"];
+                                break;
+                            }                     
+                        break;
+
+                    default:
+                        break; 
+                }    
+            });
+
+        }
+
+        this.onload  = () => 
+        {
+            const arrayLabels = document.querySelectorAll('label');
+            arrayLabels.forEach(element => 
+            {   
+                element.addEventListener('mouseover',() => colorChangeOver(element));
+                element.addEventListener('mouseout',() => colorChangeOut(element));
+            });
+            const translateButton =  document.getElementsByTagName('button');
+            translateButton[0].addEventListener('click',() => Translate());
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h2>Datos de contacto</h2>
+    </div>
+    <div>
+        <form>
+            <p>Si quieres contactar con nosotros envíanos este formulario relleno:</p>
+            <label><span>Nombre:</span> <input type="text"/></label>
+            <label><span>Apellidos:</span> <input type="text"/></label>
+            <label><span>Correo electrónico:</span> <input type="text"/></label>
+        </form>
+        <div>
+            <button type="text">Traducir</button>
+        </div>
+    </div>
+</body>
+</html>

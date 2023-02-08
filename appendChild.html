@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #genDiv
+    {
+        border : solid;
+        border-color: blue;
+        display: flex;
+        flex-direction: row;
+        overflow: auto;
+    }
+    .square
+    {
+        border : solid;
+        border-width : 2px;
+        border : "#0000FF";
+        width : 50px;
+        height : 50px;
+        margin: 5px;
+    }
+
+
+</style>
+<script>
+    function add()
+    {
+        let square = document.createElement('div');
+        square.setAttribute('class','square');
+        document.querySelector('#genDiv').appendChild(square);
+        let node = document.createTextNode('Texto');
+        square.appendChild(node);
+    }
+    
+    this.onload  = () =>
+    {
+        document.getElementById('append').addEventListener('click', add);
+    }
+
+</script>
+<body>
+    <div id="genDiv"></div>
+    <button id="append"></button>
+</body>
+</html>
